@@ -6,6 +6,11 @@ class Api::V1::PostsController < ApplicationController
     render json: post, status: :created
   end
 
+  def index
+    posts = Post.all
+    render json: posts  
+  end
+
   private
   def post_params
     params.require(:post).permit(:title, :content)
