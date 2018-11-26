@@ -7,8 +7,13 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def index
-    posts = Post.all
+    posts = Post.all.order(updated_at: :desc)
     render json: posts  
+  end
+
+  def show
+    post = Post.find params[:id]
+    render json: post
   end
 
   private
