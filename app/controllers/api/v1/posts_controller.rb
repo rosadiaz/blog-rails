@@ -2,8 +2,11 @@ class Api::V1::PostsController < ApplicationController
   def create
     post = Post.new post_params
     
-    post.save
-    render json: post, status: :created
+    if post.save
+      render json: post, status: :created
+    else
+      render json: {errors: post.errors.full_messages}, status: 422
+    end
   end
 
   def index
@@ -18,8 +21,11 @@ class Api::V1::PostsController < ApplicationController
 
   def update
     post = Post.find params[:id]  
-    post.update post_params
-    render json:post
+    if post.update post_params
+      render json:post
+    else
+      render json: {errors: post.errors.full_messages}, status: 422
+    end
   end
 
   def destroy
