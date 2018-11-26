@@ -19,7 +19,13 @@ class Api::V1::PostsController < ApplicationController
   def update
     post = Post.find params[:id]  
     post.update post_params
-    render json:post, status: :updated
+    render json:post
+  end
+
+  def destroy
+    post = Post.find params[:id]
+    post.destroy
+    render json: {}
   end
 
   private
